@@ -5,6 +5,7 @@ import CartIcon from './components/CartIcon';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import { CartProvider } from './context/CartContext';
+import Home from './components/Home';
 
 function App() {
     const products = [
@@ -35,7 +36,8 @@ function App() {
         <Router>
             <Navbar />
             <Routes>
-                <Route path="/" element={<ProductList products={products}/>} />
+                <Route path="/" element={<Home />} />
+                <Route path="/store" element={<ProductList products={products}/>} />
                 <Route path="/about" element={<About />} />
             </Routes>
             <CartIcon />

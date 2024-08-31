@@ -1,0 +1,30 @@
+nav {
+    padding: 10px;
+    background-color: #333;
+    border-bottom: 1px solid #444;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+}
+
+nav a {
+    color: #ddd;
+    font-weight: normal;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a.active {
+    color: white;
+    font-weight: bold;
+    background-color: #555;
+}
+
+nav a:hover {
+    color: white;
+    background-color: #666;
+}
