@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import { CartProvider } from './context/CartContext';
 import Home from './components/Home';
+import Contact from './components/Contact';
 
 function App() {
     const products = [
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/store" element={<ProductList products={products}/>} />
                 <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
             <CartIcon />
         </Router>
