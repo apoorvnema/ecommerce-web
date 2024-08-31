@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 
-const Cart = () => {
-    const {cart, addToCart, removeItemFromCart} = useContext(CartContext);
+const Cart = ({ onClose }) => {
+    const { cart, removeItemFromCart } = useContext(CartContext);
 
     return (
         <div style={{
@@ -18,6 +18,7 @@ const Cart = () => {
             transition: 'transform 0.3s ease',
             transform: 'translateX(0)',
         }}>
+            <button onClick={onClose} style={{ position: 'absolute', top: '10px', right: '10px' }}>✖️</button>
             <h2>Cart</h2>
             {cart.length === 0 ? (
                 <p>Your cart is empty.</p>
