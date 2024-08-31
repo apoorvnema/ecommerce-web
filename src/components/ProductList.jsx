@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './ProductList.css';
+import { CartContext } from '../context/CartContext';
 
 const ProductList = ({ products }) => {
+    const {cart, addToCart} = useContext(CartContext);
     return (
         <div className="product-list">
             {products.map((product, index) => (
@@ -10,7 +12,7 @@ const ProductList = ({ products }) => {
                     <div className="product-info">
                         <h3>{product.title}</h3>
                         <p>${product.price}</p>
-                        <button className="button">Add to Cart</button>
+                        <button className="button" onClick={() => addToCart(product)}>Add to Cart</button>
                     </div>
                 </div>
             ))}
