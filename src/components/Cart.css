@@ -1,0 +1,27 @@
+.cart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.cart-item img {
+    border-radius: 8px;
+}
+
+button {
+    background-color: #f44336;
+    /* Red */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
