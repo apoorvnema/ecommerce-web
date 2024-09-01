@@ -26,6 +26,7 @@ export const AuthContextProvider = ({ children }) => {
         setToken(null);
         localStorage.removeItem('token');
         localStorage.removeItem('expirationTime');
+        localStorage.removeItem('email');
         navigate('/login');
     }, []);
 
@@ -38,10 +39,11 @@ export const AuthContextProvider = ({ children }) => {
         }
     }, [logoutHandler, initialRemainingTime]);
 
-    const loginHandler = (token, expirationTime) => {
+    const loginHandler = (token, expirationTime, email) => {
         setToken(token);
         localStorage.setItem('token', token);
         localStorage.setItem('expirationTime', expirationTime);
+        localStorage.setItem('email', email);
 
         const remainingDuration = calculateRemainingTime(expirationTime);
         setTimeout(logoutHandler, remainingDuration);

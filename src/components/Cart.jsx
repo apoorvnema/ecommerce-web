@@ -30,7 +30,7 @@ const Cart = ({ onClose }) => {
                             <h3>{item.title}</h3>
                             <p>Price: ${item.price}</p>
                             <p>Quantity: {item.quantity}</p>
-                            <button onClick={() => removeItemFromCart(index)}>Remove</button>
+                            <button onClick={() => removeItemFromCart(index, item._id)}>Remove</button>
                         </div>
                     </div>
                 ))

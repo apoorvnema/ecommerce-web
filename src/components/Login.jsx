@@ -41,7 +41,7 @@ const Login = () => {
         new Date().getTime() + +data.expiresIn * 1000
       ).toISOString();
 
-      authCtx.login(data.idToken, expirationTime);
+      authCtx.login(data.idToken, expirationTime, data.email);
       alert('Login successful');
       navigate('/store');
     } catch (err) {
