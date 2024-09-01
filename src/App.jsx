@@ -8,6 +8,8 @@ import { CartProvider } from './context/CartContext';
 import Home from './components/Home';
 import Contact from './components/Contact';
 import ProductDetail from './components/ProductDetail';
+import Login from './components/Login';
+import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
     const products = [
@@ -74,21 +76,24 @@ function App() {
                 'Fantastic colors and great durability.'
             ]
         }
-    ];    
+    ];
 
     return (
         <CartProvider>
-        <Router>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/store" element={<ProductList products={products}/>} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/store/:productId" element={<ProductDetail products={products} />} />
-            </Routes>
-            <CartIcon />
-        </Router>
+            <Router>
+                <AuthContextProvider>
+                    <Navbar />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/store" element={<ProductList products={products} />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/store/:productId" element={<ProductDetail products={products} />} />
+                    </Routes>
+                    <CartIcon />
+                </AuthContextProvider>
+            </Router>
         </CartProvider>
     );
 }
