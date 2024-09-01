@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import ProductList from './components/ProductList';
 import CartIcon from './components/CartIcon';
 import Navbar from './components/Navbar';
@@ -9,9 +10,11 @@ import Home from './components/Home';
 import Contact from './components/Contact';
 import ProductDetail from './components/ProductDetail';
 import Login from './components/Login';
-import { AuthContextProvider } from './context/AuthContext';
+import AuthContext from './context/AuthContext';
 
 function App() {
+    const authCtx = useContext(AuthContext);
+    const isLoggedIn = authCtx.isLoggedIn;
     const products = [
         {
             id: 867,
@@ -80,20 +83,20 @@ function App() {
 
     return (
         <CartProvider>
-            <Router>
-                <AuthContextProvider>
-                    <Navbar />
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/store" element={<ProductList products={products} />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/contact" element={<Contact />} />
-                        <Route path="/store/:productId" element={<ProductDetail products={products} />} />
-                    </Routes>
-                    <CartIcon />
-                </AuthContextProvider>
-            </Router>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                    path="/store"
+                    element={isLoggedIn ? <ProductList products={products} /> : <Navigate to="/login" />}
+                />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to="/" />}/>
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/store/:productId" element={<ProductDetail products={products} />} />
+                <Route path="*" element={<h1>Page Not Found</h1>} />
+            </Routes>
+            <CartIcon />
         </CartProvider>
     );
 }

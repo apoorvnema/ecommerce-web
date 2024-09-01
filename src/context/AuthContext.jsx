@@ -27,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('expirationTime');
         navigate('/login');
-    }, [navigate]);
+    }, []);
 
     useEffect(() => {
         if (initialRemainingTime <= 60000) {
