@@ -1,7 +1,6 @@
 import { Navigate } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React, { lazy, Suspense, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import ProductList from './components/ProductList';
 import CartIcon from './components/CartIcon';
 import Navbar from './components/Navbar';
 import About from './components/About';
@@ -11,6 +10,8 @@ import Contact from './components/Contact';
 import ProductDetail from './components/ProductDetail';
 import Login from './components/Login';
 import AuthContext from './context/AuthContext';
+
+const ProductList = lazy(() => import('./components/ProductList'));
 
 function App() {
     const authCtx = useContext(AuthContext);
@@ -88,10 +89,14 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route
                     path="/store"
-                    element={isLoggedIn ? <ProductList products={products} /> : <Navigate to="/login" />}
+                    element={
+                        <Suspense fallback={<div>Loading Product List...</div>}>
+                            {isLoggedIn ? <ProductList products={products} /> : <Navigate to="/login" />}
+                        </Suspense>
+                    }
                 />
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to="/" />}/>
+                <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to="/" />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/store/:productId" element={<ProductDetail products={products} />} />
                 <Route path="*" element={<h1>Page Not Found</h1>} />
